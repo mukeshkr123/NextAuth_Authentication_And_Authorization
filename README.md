@@ -85,5 +85,36 @@ GOOGLE_ID=...
 GOOGLE_SECRET=...
 GITHUB_ID=...
 GITHUB_SECRET=....
+NEXTAUTH_SECRET=a4c0337f02369f5eb007d
+NEXTAUTH_SECRET=EsbaypWcCwyWg3WZJ4xUE6EzwkwSmEwfMhPGMiQD6CY=
+```
 
+- create this with the help of openssl `NEXTAUTH_SECRET` - run
+  `openssl rand -base64 32`
+
+### Login / Logout Funtionality
+
+- Add this in any navabar or component
+
+```jsx
+import { getServerSession } from "next-auth";
+import { options } from "@/app/api/auth/[...nextauth]/options";
+
+const Navbar = async () => {
+  const session = await getServerSession(options);
+
+  return (
+    <header className="bg-gray-600 text-gray-100">
+      <nav className="flex justify-between items-center w-full px-10 py-4">
+        {session ? (
+          <Link href="/api/auth/signout?callbackUrl=/">Logout </Link>
+        ) : (
+          <Link href="/api/auth/signin?">Login </Link>
+        )}
+      </nav>
+    </header>
+  );
+};
+
+export default Navbar;
 ```
