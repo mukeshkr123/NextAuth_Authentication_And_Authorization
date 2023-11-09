@@ -204,3 +204,15 @@ const MemberClient = () => {
 
 export default MemberClient;
 ```
+
+### Protecting Pages - Middleware
+
+- If you only want to secure certain pages, export a config object with a matcher:
+
+```jsx
+export { default } from "next-auth/middleware";
+
+export const config = {
+  matcher: ["/create-user"],
+};
+```
