@@ -75,3 +75,15 @@ import { options } from "./options";
 const handler = NextAuth(options);
 export { handler as GET, handler as POST };
 ```
+
+## Setup built-in OAuth Provider - (Google / GitHub)
+
+-add this in `.env.local`
+
+```.env
+GOOGLE_ID=...
+GOOGLE_SECRET=...
+GITHUB_ID=...
+GITHUB_SECRET=....
+
+```
