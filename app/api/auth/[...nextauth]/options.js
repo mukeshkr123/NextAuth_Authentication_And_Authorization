@@ -1,21 +1,3 @@
-# NextAuth_Authentication_And_Authorization
-
--🔐 Simplify user authentication and authorization in your Next.js applications with NextAuth. This repository provides a comprehensive implementation showcasing best practices for secure user authentication and fine-grained authorization controls. Integrate various authentication providers seamlessly and manage user permissions with ease. Level up your Next.js projects with robust and user-friendly authentication using NextAuth!.
-
-## Installation
-
-1. NextAuth installation - `npm install next-auth`
-
-## Create NextAuth (Auth.js) API - Options / Routes
-
-- create a api folder under the app `app/api/auth/[...nextauth]` having two file.
-
-1.  `options.js`
-2.  `route.js`
-
-- For options file
-
-```jsx
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -64,14 +46,3 @@ export const options = {
     },
   },
 };
-```
-
-- For route file
-
-```jsx
-import NextAuth from "next-auth/next";
-import { options } from "./options";
-
-const handler = NextAuth(options);
-export { handler as GET, handler as POST };
-```
