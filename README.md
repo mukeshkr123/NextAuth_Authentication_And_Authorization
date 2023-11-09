@@ -148,3 +148,59 @@ const Member = async () => {
 
 export default Member;
 ```
+
+### Protecting Pages - Client Side Page
+
+1. create a `AuthProvider.jsx` component
+
+```jsx
+"use client";
+
+const { SessionProvider } = require("next-auth/react");
+
+const AuthProvider = ({ children }) => {
+  return <SessionProvider>{children}</SessionProvider>;
+};
+
+export default AuthProvider;
+```
+
+2. Wrap the `AuthProvider` to body in `layout.jsx`
+
+```jsx
+import AuthProvider from "@/components/AuthProvider";
+
+<AuthProvider>
+  <body className="bg-gray-100">
+    <Navbar />
+    <div className="mt-2 p-10">{children}</div>
+  </body>
+</AuthProvider>;
+```
+
+3. use in any client side pages for protection
+
+```jsx
+"use client";
+
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+
+const MemberClient = () => {
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect("/api/auth/signin/callbackUrl=/client-member");
+    },
+  });
+  return (
+    <div>
+      <h1>Member Client Session</h1>
+      {session?.user && <p>{session?.user?.email}</p>}
+      {session?.role && <p>{session?.role}</p>}
+    </div>
+  );
+};
+
+export default MemberClient;
+```
